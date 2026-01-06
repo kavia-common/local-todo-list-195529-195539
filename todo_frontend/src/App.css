@@ -1,12 +1,25 @@
 /* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
+  /* Light theme colors (keep background/surface/text as-is) */
   --bg-primary: #ffffff;
   --bg-secondary: #f8f9fa;
   --text-primary: #282c34;
-  --text-secondary: #61dafb;
   --border-color: #e9ecef;
-  --button-bg: #007bff;
+
+  /*
+    Orange brand palette for accents/primary actions.
+    These variables are intended to be used anywhere the UI needs a primary/accent color
+    (buttons, highlights, links, focus rings, completed state accents, etc.).
+  */
+  --brand-primary: #f97316;   /* orange-500 */
+  --brand-primary-hover: #ea580c; /* orange-600 */
+  --brand-primary-active: #c2410c; /* orange-700 */
+  --brand-accent: #fb923c;    /* orange-400 */
+  --focus-ring: rgba(249, 115, 22, 0.35);
+
+  /* Existing variables kept for compatibility with current styles */
+  --text-secondary: var(--brand-primary);
+  --button-bg: var(--brand-primary);
   --button-text: #ffffff;
 }
 
@@ -15,9 +28,18 @@
   --bg-primary: #1a1a1a;
   --bg-secondary: #282c34;
   --text-primary: #ffffff;
-  --text-secondary: #61dafb;
   --border-color: #404040;
-  --button-bg: #0056b3;
+
+  /* Orange accents in dark mode as well */
+  --brand-primary: #fb923c; /* orange-400 to pop on dark backgrounds */
+  --brand-primary-hover: #f97316; /* orange-500 */
+  --brand-primary-active: #ea580c; /* orange-600 */
+  --brand-accent: #fdba74; /* orange-300 */
+  --focus-ring: rgba(251, 146, 60, 0.4);
+
+  /* Existing variables kept for compatibility with current styles */
+  --text-secondary: var(--brand-primary);
+  --button-bg: var(--brand-primary);
   --button-text: #ffffff;
 }
 
@@ -77,11 +99,19 @@
 .theme-toggle:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+  background-color: var(--brand-primary-hover);
 }
 
 .theme-toggle:active {
   transform: translateY(0);
+  background-color: var(--brand-primary-active);
+}
+
+.theme-toggle:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 4px var(--focus-ring),
+    0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes App-logo-spin {
